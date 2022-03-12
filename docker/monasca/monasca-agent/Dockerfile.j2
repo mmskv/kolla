@@ -30,5 +30,8 @@ RUN ln -s monasca-agent-source/* monasca-agent \
 
 {% block footer %}{% endblock %}
 
-USER monasca
-
+USER root
+# non-root user does not work with libvirt.sock.
+# Need configuration in nova-libvirt container to allow
+# USER monasca to access libvirt.sock
+# https://review.opendev.org/c/openstack/kolla/+/300574/20/docker/ceilometer/ceilometer-compute/Dockerfile.j2#41
